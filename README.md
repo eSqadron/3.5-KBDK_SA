@@ -12,6 +12,7 @@ Funkcjonalności:
 2)Wyszukanie listy po nazwie i jej wyświetlenie.
 
 3)Zapis i wczytywanie wydarzeń przy zamknięciu/otwarciu programu.
+  https://www.guru99.com/reading-and-writing-files-in-python.html
 
 4)Zapis listy do pliku pod zadaną ścieżkę.
 
