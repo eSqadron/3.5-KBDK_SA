@@ -2,6 +2,7 @@ import tkinter as tk
 ###########
 #FUNCTIONS
 def newList():
+    newListName = entry.get()
     listButton = tk.Button(
         text=newListName,
         width=25,
@@ -33,7 +34,7 @@ entry = tk.Entry(
 )
 entry.insert(0, "a default value")
 entry.pack()
-newListName = entry.get()
+
 #tworzę przycisk tworzący nową listę
 newListButton = tk.Button(
     text="utworz liste",
