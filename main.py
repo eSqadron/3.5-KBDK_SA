@@ -11,7 +11,17 @@ class ShoppingList:
 
     #metoda wypisująca zawartość zmiennej list_
     def printList(self):
-        pass
+        global currentlyOpenedList #aby była używana globalna wersja zmiennej
+        if currentlyOpenedList is None: #może coś wyświetlić tylko jeżeli nic nie jest wyświetlone
+            for i in self.list_:
+                w = tk.Entry(   #tworzy pola typu entry w których są nazwy produktów
+                    f2,
+                    width=25
+                )
+                w.insert(0, i)
+                w.pack(side=tk.TOP)
+                self.entryFields_.append(w) #dodaje te pola do listy aby potem dało się je usunac
+            currentlyOpenedList = self #przypisuje siebie jako otawrta liste
 
     #metoda dodająca nowy produkt do listy
     def addProduct(self, productName):
