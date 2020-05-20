@@ -13,6 +13,8 @@ class ShoppingList:
     def printList(self):
         global currentlyOpenedList #aby była używana globalna wersja zmiennej
         if currentlyOpenedList is None: #może coś wyświetlić tylko jeżeli nic nie jest wyświetlone
+            currentlyOpenedList = self #przypisuje siebie jako otawrta liste
+            #pętla wypisująca wszystkie wartości z list_ do poszczególnych pól entry
             for i in self.list_:
                 w = tk.Entry(   #tworzy pola typu entry w których są nazwy produktów
                     f2,
@@ -21,7 +23,27 @@ class ShoppingList:
                 w.insert(0, i)
                 w.pack(side=tk.TOP)
                 self.entryFields_.append(w) #dodaje te pola do listy aby potem dało się je usunac
-            currentlyOpenedList = self #przypisuje siebie jako otawrta liste
+            ##############
+            
+            #pole tekstowe odpowiedzialne za zebranie nazwy nowego porduktu
+            newEntry = tk.Entry(
+                f2,
+                width=25
+            )
+            newEntry.insert(0, "Podaj nazwę nowego produktu")
+            newEntry.pack(side=tk.BOTTOM)
+            ############
+
+            #przycisk odpowiedzialny za dodawnia nowego produktu
+            newButton = tk.Button(
+                f2,
+                width=25,
+                height=1,
+                text="dodaj produkt",
+                command=lambda: self.addProduct(newEntry.get())
+            )
+            newButton.pack(side=tk.BOTTOM)
+            ##########
 
     #metoda dodająca nowy produkt do listy
     def addProduct(self, productName):
