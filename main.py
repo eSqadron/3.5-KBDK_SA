@@ -12,6 +12,7 @@ class ShoppingList:
     #metoda wypisująca zawartość zmiennej list_
     def printList(self):
         global currentlyOpenedList #aby była używana globalna wersja zmiennej
+        if currentlyOpenedList is not None: currentlyOpenedList.closeList() #zamyka obecnie otwartą listę zanim otworzy nową
         if currentlyOpenedList is None: #może coś wyświetlić tylko jeżeli nic nie jest wyświetlone
             currentlyOpenedList = self #przypisuje siebie jako otawrta liste
             #pętla wypisująca wszystkie wartości z list_ do poszczególnych pól entry
