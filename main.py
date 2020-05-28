@@ -114,7 +114,6 @@ def createNewListButton():
         command=newList #command to funkcja która ma być wywołana po kliknięciu przycisku. MUSI być bez (), inaczej funkcja wykona się przy interpretacji kodu, a nie przy klinkięciu.
     )
     newListButton.pack()
-    limitCheck() #sprawdzenie czy limit został osiągniety, na razie można olać
 
 #funkcja tworząca przycisk służący do wyszukiwania list z listy i pole tekstowe typu entry gdzie trzeba podać nazwę wyszukiwanej listy
 def createSearchBarButton():
@@ -139,7 +138,6 @@ def newList():
 
     listsList.append(newListInstance) #dodaje do tablicy z listami zakupów nową listę
     listsNum = len(listsList) #zwiększa ilość zapisanych list
-    limitCheck() #sprawdza czy osiągnięto limit list i w razie potrzeby ustawia blokadę
 
 
 
