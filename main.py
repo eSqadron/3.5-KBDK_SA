@@ -94,7 +94,27 @@ listsNum=len(listsList) #obecna ilosc list
 
 #funkcja tworząca przycisk służący do tworzenia nowych list i pole tekstowe typu entry gdzie trzeba podać nazwę nowej listy
 def createNewListButton():
-    pass
+    global newListButton #aby do obu pól można było się odwoływać gdzie indziej muyszą byc globalne
+    global entry
+
+    # pole do wpisania tytułu nowej listy
+    entry = tk.Entry(
+        f1, #f1 przypisuje ten przycisk do ramki1
+        width=25
+    )
+    entry.insert(0, "Podaj nazwę nowej listy") #insert "wkłada" bazowy tekst do pola entry
+    entry.pack() #"pakuje" pole aby było odpowiednio wyświetlane w ramce
+
+    # przycisk, po kliknięciu którego dodaje się lista o tytule wpisanym w entry
+    newListButton = tk.Button(
+        f1,
+        text="utworz liste",
+        width=25,
+        height=4,
+        command=newList #command to funkcja która ma być wywołana po kliknięciu przycisku. MUSI być bez (), inaczej funkcja wykona się przy interpretacji kodu, a nie przy klinkięciu.
+    )
+    newListButton.pack()
+    limitCheck() #sprawdzenie czy limit został osiągniety, na razie można olać
 
 #funkcja tworząca przycisk służący do wyszukiwania list z listy i pole tekstowe typu entry gdzie trzeba podać nazwę wyszukiwanej listy
 def createSearchBarButton():
