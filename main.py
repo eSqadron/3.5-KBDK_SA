@@ -47,9 +47,12 @@ class ShoppingList:
             ##########
 
     #metoda dodająca nowy produkt do listy
-    def addProduct(self, productName):
-        pass
-
+      def addProduct(self, productName):
+        self.list_.append(productName)
+        if self == currentlyOpenedList:
+            self.printList()
+            
+            
     #metoda zamykająca obecnie otwartą listę
     def closeList(self):
         pass
