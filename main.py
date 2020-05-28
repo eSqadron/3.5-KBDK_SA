@@ -103,7 +103,24 @@ def createSearchBarButton():
 
 #tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
 def newList():
-    pass
+    global listsNum 
+    newListInstance = ShoppingList(entry.get()) #zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
+
+    #przycisk do wyświetlania nowo utworzonej listy
+    listButton = tk.Button(
+        f1,
+        text=newListInstance.name_,
+        width=25,
+        height=2,
+        command = newListInstance.printList
+    )
+    listButton.pack()
+
+
+    listsList.append(newListInstance) #dodaje do tablicy z listami zakupów nową listę
+    listsNum = len(listsList) #zwiększa ilość zapisanych list
+    limitCheck() #sprawdza czy osiągnięto limit list i w razie potrzeby ustawia blokadę
+
 
 
 #############
