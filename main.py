@@ -6,7 +6,8 @@ class ShoppingList:
         self.name_=name #nazwa tej konkretnej listy
         self.list_ = [] #zawartość tej listy (str)
         self.entryFields_ = [] #lista z polami Entry Field wyświetlanymi po prawej stronie
-
+        self.newButton = None #zmienna w której zapisany jest przycisk dodającegy nowe pole do tej listy
+        self.newEntry = None #zmienna w której zapisane jest pole tekstowe Entry Field do którego należy podać nazwę nowego pola
 
 
     #metoda wypisująca zawartość zmiennej list_
@@ -15,35 +16,36 @@ class ShoppingList:
         if currentlyOpenedList is not None: currentlyOpenedList.closeList() #zamyka obecnie otwartą listę zanim otworzy nową
         if currentlyOpenedList is None: #może coś wyświetlić tylko jeżeli nic nie jest wyświetlone
             currentlyOpenedList = self #przypisuje siebie jako otawrta liste
+            while "" in self.list_: self.list_.remove("") #czyszczenie listy z pustych elementów
             #pętla wypisująca wszystkie wartości z list_ do poszczególnych pól entry
-            for i in self.list_:
+            for j in self.list_:
                 w = tk.Entry(   #tworzy pola typu entry w których są nazwy produktów
                     f2,
                     width=25
                 )
-                w.insert(0, i)
+                w.insert(0, j)
                 w.pack(side=tk.TOP)
                 self.entryFields_.append(w) #dodaje te pola do listy aby potem dało się je usunac
             ##############
             
             #pole tekstowe odpowiedzialne za zebranie nazwy nowego porduktu
-            newEntry = tk.Entry(
+            self.newEntry = tk.Entry(
                 f2,
                 width=25
             )
-            newEntry.insert(0, "Podaj nazwę nowego produktu")
-            newEntry.pack(side=tk.BOTTOM)
+            self.newEntry.insert(0, "Podaj nazwę nowego produktu")
+            self.newEntry.pack(side=tk.BOTTOM)
             ############
 
             #przycisk odpowiedzialny za dodawnia nowego produktu
-            newButton = tk.Button(
+            self.newButton = tk.Button(
                 f2,
                 width=25,
                 height=1,
                 text="dodaj produkt",
-                command=lambda: self.addProduct(newEntry.get())
+                command=lambda: self.addProduct(self.newEntry.get())
             )
-            newButton.pack(side=tk.BOTTOM)
+            self.newButton.pack(side=tk.BOTTOM)
             ##########
 
     #metoda dodająca nowy produkt do listy
