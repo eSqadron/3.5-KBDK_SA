@@ -110,14 +110,30 @@ def createNewListButton():
         f1,
         text="utworz liste",
         width=25,
-        height=4,
+        height=3,
         command=newList #command to funkcja która ma być wywołana po kliknięciu przycisku. MUSI być bez (), inaczej funkcja wykona się przy interpretacji kodu, a nie przy klinkięciu.
     )
     newListButton.pack()
 
 #funkcja tworząca przycisk służący do wyszukiwania list z listy i pole tekstowe typu entry gdzie trzeba podać nazwę wyszukiwanej listy
 def createSearchBarButton():
-    pass
+    global searchButton
+    global searchEntry
+
+    searchEntry = tk.Entry(
+        f1,
+        width=25
+    )
+    searchEntry.insert(0, "podaj szukaną frazę")
+    searchEntry.pack()
+
+    searchButton = tk.Button(
+        f1,
+        text="wyszukaj",
+        width=25,
+        height=3,
+    )
+    searchButton.pack()
 
 
 #tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
