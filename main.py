@@ -73,7 +73,7 @@ class ShoppingList:
 #zmienne gloablne używane WSZĘDZIE
 listsList=[] #lista list - lista zawierająca listy zakupów
 
-currentlyOpenedList = None #obecnie otwarta lista
+currentlyOpenedList: Optional[ShoppingList] = None  # obecnie otwarta lista
 
 
 #testowa lista zakupów
