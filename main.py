@@ -1,4 +1,5 @@
 import tkinter as tk
+from typing import Optional
 
 #klasa- pojedyncza lista zakupów
 class ShoppingList:
