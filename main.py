@@ -224,6 +224,14 @@ for i in listsList:
         command = i.printList
     )
     listButton.pack()
+    
+    
+#Menu górne poziome
+menu = tk.Menu(root)
+root.config(menu=menu)
+menu.add_command(label="Zapisz", command=saveToFile)
+menu.add_command(label="Wczytaj", command=readFromFile)
+
 
 
 root.mainloop()
