@@ -62,7 +62,10 @@ class ShoppingList:
 
     #metoda zapisująca obecnie otwartą listę do listy list
     def saveList(self):
-        pass
+         global currentlyOpenedList
+         if currentlyOpenedList != None:
+            for i in range(len(currentlyOpenedList.entryFields_)):
+                 (currentlyOpenedList.list_)[i] = ((currentlyOpenedList.entryFields_)[i]).get()
 
     #Zamiast 4 powyższych metod można zaimplementować funkcje printCurrentlyOpenedList(), addProductToCurrentlyOpenedList(), closeCurrentlyOpenedList() i saveCurrentlyOpenedList().
     #Jeżeli projekt który mam w głowie okaże się niemożliwy do wykonania może się to w niektórych przypadkach okazać konieczne. Lub po prostu tak może być łatwiej.
