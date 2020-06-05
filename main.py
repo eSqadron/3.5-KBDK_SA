@@ -160,6 +160,16 @@ def newList():
     listsNum = len(listsList) #zwiększa ilość zapisanych list
 
 
+# funkcja używana w opcji menu górnego poziomego "Zapisz", służąca zapisowi do pliku
+def saveToFile():
+    pass
+
+
+# funkcja używana w opcji menu górnego poziomego "Wczytaj", służąca wczytywaniu z pliku
+def readFromFile():
+    pass
+
+
 
 #############
 
