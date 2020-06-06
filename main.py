@@ -136,8 +136,14 @@ def createSearchBarButton():
         text="wyszukaj",
         width=25,
         height=3,
+        command=openSearchedList
     )
     searchButton.pack()
+    
+def openSearchedList():
+    for i in listsList:
+        if i.name_ == searchEntry.get():
+            i.printList()
 
 
 #tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
