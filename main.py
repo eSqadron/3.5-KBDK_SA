@@ -58,7 +58,16 @@ class ShoppingList:
             
     #metoda zamykająca obecnie otwartą listę
     def closeList(self):
-        pass
+        global currentlyOpenedList
+    isShowed = False
+    if currentlyOpenedList != None:
+        saveCurrentlyOpenedList()
+        for i in currentlyOpenedList.entryFields_:
+            i.destroy()
+        currentlyOpenedList.newButton.destroy()
+        currentlyOpenedList.newEntry.destroy()
+        currentlyOpenedList.entryFields_.clear()
+        currentlyOpenedList = None
 
     #metoda zapisująca obecnie otwartą listę do listy list
     def saveList(self):
