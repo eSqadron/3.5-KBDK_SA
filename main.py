@@ -150,9 +150,14 @@ def createSearchBarButton():
     searchButton.pack()
     
 def openSearchedList():
+    found = False
     for i in listsList:
         if i.name_ == searchEntry.get():
+            found = True
             i.printList()
+    if not found:
+        searchEntry.delete(0, tk.END)
+        searchEntry.insert(0, "brak takiej listy")
 
 
 #tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
