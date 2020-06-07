@@ -61,7 +61,7 @@ class ShoppingList:
         global currentlyOpenedList
         isShowed = False
         if currentlyOpenedList != None:
-            saveCurrentlyOpenedList()
+            currentlyOpenedList.saveList()
             for i in currentlyOpenedList.entryFields_:
                 i.destroy()
             currentlyOpenedList.newButton.destroy()
