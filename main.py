@@ -57,24 +57,23 @@ class ShoppingList:
             
             
     #metoda zamykająca obecnie otwartą listę
-    def closeList(self):
+     def closeList(self):
         global currentlyOpenedList
         isShowed = False
-        if currentlyOpenedList != None:
-            currentlyOpenedList.saveList()
-            for i in currentlyOpenedList.entryFields_:
-                i.destroy()
-            currentlyOpenedList.newButton.destroy()
-            currentlyOpenedList.newEntry.destroy()
-            currentlyOpenedList.entryFields_.clear()
-            currentlyOpenedList = None
+        self.saveList()
+        for i in self.entryFields_:
+            i.destroy() 
+        self.newButton.destroy()
+        self.newEntry.destroy()
+        self.entryFields_.clear()
+        currentlyOpenedList = None
 
     #metoda zapisująca obecnie otwartą listę do listy list
-    def saveList(self):
-         global currentlyOpenedList
-         if currentlyOpenedList != None:
-            for i in range(len(currentlyOpenedList.entryFields_)):
-                 (currentlyOpenedList.list_)[i] = ((currentlyOpenedList.entryFields_)[i]).get()
+        def saveList(self):
+        global currentlyOpenedList
+
+        for i in range(len(self.entryFields_)):
+            self.list_[i] = (self.entryFields_[i]).get()
 
     #Zamiast 4 powyższych metod można zaimplementować funkcje printCurrentlyOpenedList(), addProductToCurrentlyOpenedList(), closeCurrentlyOpenedList() i saveCurrentlyOpenedList().
     #Jeżeli projekt który mam w głowie okaże się niemożliwy do wykonania może się to w niektórych przypadkach okazać konieczne. Lub po prostu tak może być łatwiej.
