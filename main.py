@@ -220,11 +220,21 @@ closeListButton.pack(side = tk.TOP, anchor = tk.N)
 
 
 
-
+tk.Label(
+    f1,
+    text="Tworzenie nowej listy:"
+).pack()
 #funkcja tworząca przycisk tworzący nową listę i pole do wpisania jej nazwy - możnaby całą funckjonalność tej funkcji umieścić tutaj, nie musi być funkcji
 createNewListButton()
+tk.Label(
+    f1,
+    text="Wyszukiwarka:"
+).pack()
 createSearchBarButton() #pole do wyszukiwania list - same as above
-
+tk.Label(
+    f1,
+    text="lista list zakupów:"
+).pack()
 
 
 #pętla zbierająca istniejace listy z talicy listsList i tworząca przyciski do nich stworzona w celach testowych - trzeba będzie to przenieść do funkcji wczytującej z pliku
