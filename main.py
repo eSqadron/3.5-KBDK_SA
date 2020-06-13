@@ -69,16 +69,10 @@ class ShoppingList:
         currentlyOpenedList = None
 
     #metoda zapisująca obecnie otwartą listę do listy list
-        def saveList(self):
+    def saveList(self):
         global currentlyOpenedList
-
         for i in range(len(self.entryFields_)):
             self.list_[i] = (self.entryFields_[i]).get()
-
-    #Zamiast 4 powyższych metod można zaimplementować funkcje printCurrentlyOpenedList(), addProductToCurrentlyOpenedList(), closeCurrentlyOpenedList() i saveCurrentlyOpenedList().
-    #Jeżeli projekt który mam w głowie okaże się niemożliwy do wykonania może się to w niektórych przypadkach okazać konieczne. Lub po prostu tak może być łatwiej.
-
-
 
 
 
@@ -219,7 +213,7 @@ closeListButton = tk.Button(
     text="zamknij obecną listę",
     width=25,
     height=1,
-    command=lambda: currentlyOpenedList.closeList if currentlyOpenedList is not None else None #jeżeli ktoś zamiast metody closeList zdecyduje się zaimplementować funkcję closeCurrentlyOpenedList należy zamienić tą linijkę na command=closeCurrentlyOpenedList
+    command=lambda: currentlyOpenedList.closeList if currentlyOpenedList is not None else None
 )
 closeListButton.pack(side = tk.TOP, anchor = tk.N)
 
