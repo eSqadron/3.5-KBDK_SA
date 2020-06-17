@@ -235,6 +235,18 @@ class ListNameLengthError(ListError, ShoppingList):
             message=f"Ilość znaków w nazwie: {len(currentList.name_)} przekracza maksymalną: {currentList.maxNameLen}")
 
         
+class ListNameAlreadyTakenError(ListError, ShoppingList):
+    """Nazwa listy zajęta"""
+
+    def __init__(self, currentList: ShoppingList):
+        super().__init__(
+            msg=f"Nazwa \"{currentList.name_}\" jest już zajęta")
+
+        tk.messagebox.showerror(
+            title="ListNameAlreadyTakenError",
+            message=f"Nazwa \"{currentList.name_}\" jest już zajęta")
+        
+        
 
 #############
 
