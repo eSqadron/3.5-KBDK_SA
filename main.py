@@ -186,6 +186,20 @@ def readFromFile():
 
 #############
 
+# EXCEPTIONS
+
+class ListError(Exception):
+    """Podstawowa klasa wyjątku rzucana przez listy"""
+
+    def __init__(self, msg=None):
+        if msg is None:
+            msg = "Wystąpił problem z listą zakupów"
+        super().__init__(msg)
+        
+        
+
+#############
+
 
 
 #tworzy okno, chyba, wiem że musi być
