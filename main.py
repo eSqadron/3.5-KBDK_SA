@@ -12,6 +12,10 @@ class ShoppingList:
         self.newButton = None #zmienna w której zapisany jest przycisk dodającegy nowe pole do tej listy
         self.newEntry = None #zmienna w której zapisane jest pole tekstowe Entry Field do którego należy podać nazwę nowego pola
 
+        #sprawdzenie, czy nazwa listy jest zajęta
+        for i in  listsList:
+            if name in i.name_:
+                raise ListNameAlreadyTakenError(self)
 
     #metoda wypisująca zawartość zmiennej list_
     def printList(self):
