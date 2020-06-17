@@ -1,5 +1,7 @@
 import tkinter as tk
 from typing import Optional
+from tkinter import messagebox
+
 
 #klasa- pojedyncza lista zakupów
 class ShoppingList:
@@ -196,6 +198,42 @@ class ListError(Exception):
             msg = "Wystąpił problem z listą zakupów"
         super().__init__(msg)
         
+        
+class ListAmountError(ListError):
+    """Zbyt wiele list"""
+
+    def __init__(self, listsNum):
+        super().__init__(
+            msg=f"Ilość list: {listsNum} przekracza maksymalną")
+
+        tk.messagebox.showerror(
+            title="ListAmountError",
+            message=f"Ilość list: {listsNum} przekracza maksymalną")
+
+
+class ListElementsAmountError(ListError, ShoppingList):
+    """Zbyt wiele pozycji na liście"""
+
+    def __init__(self, currentList: ShoppingList):
+        super().__init__(
+            msg=f"Ilość produktów: {len(currentList.list_)} przekracza maskymalną")
+
+        tk.messagebox.showerror(
+            title="ListElementsAmountError",
+            message=f"Ilość produktów: {len(currentList.list_)} przekracza maksymalną")
+
+
+class ListNameLengthError(ListError, ShoppingList):
+    """Nazwa listy zbyt długa"""
+
+    def __init__(self, currentList: ShoppingList):
+        super().__init__(
+            msg=f"Ilość znaków w nazwie: {len(currentList.name_)} przekracza maksymalną: {currentList.maxNameLen}")
+
+        tk.messagebox.showerror(
+            title="ListNameLengthError",
+            message=f"Ilość znaków w nazwie: {len(currentList.name_)} przekracza maksymalną: {currentList.maxNameLen}")
+
         
 
 #############
