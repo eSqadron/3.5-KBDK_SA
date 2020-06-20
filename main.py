@@ -3,45 +3,44 @@ from typing import Optional
 from tkinter import messagebox
 
 
-#klasa- pojedyncza lista zakupów
+# klasa- pojedyncza lista zakupów
 class ShoppingList:
     def __init__(self, name):
-        self.name_=name #nazwa tej konkretnej listy
-        self.list_ = [] #zawartość tej listy (str)
-        self.entryFields_ = [] #lista z polami Entry Field wyświetlanymi po prawej stronie
-        self.newButton = None #zmienna w której zapisany jest przycisk dodającegy nowe pole do tej listy
-        self.newEntry = None #zmienna w której zapisane jest pole tekstowe Entry Field do którego należy podać nazwę nowego pola
-        self.maxNameLen = 25 #zmienna dodana, aby w łatwy sposób umożliwić późniejsze zmienianie limitu długości nazw
-        
-        #sprawdzenie, czy nazwa nie jest za długa
+        self.name_ = name  # nazwa tej konkretnej listy
+        self.list_ = []  # zawartość tej listy (str)
+        self.entryFields_ = []  # lista z polami Entry Field wyświetlanymi po prawej stronie
+        self.newButton = None  # zmienna w której zapisany jest przycisk dodającegy nowe pole do tej listy
+        self.newEntry = None  # zmienna w której zapisane jest pole tekstowe Entry Field do którego należy podać nazwę nowego pola
+        self.maxNameLen = 25  # zmienna dodana, aby w łatwy sposób umożliwić późniejsze zmienianie limitu długości nazw
+
+        # sprawdzenie, czy nazwa nie jest za długa
         if len(name) > self.maxNameLen:
             raise ListNameLengthError(self)
-            
-        #sprawdzenie, czy nazwa listy jest zajęta
-        for i in  listsList:
+
+        # sprawdzenie, czy nazwa listy jest zajęta
+        for i in listsList:
             if name in i.name_:
                 raise ListNameAlreadyTakenError(self)
 
-                
-    #metoda wypisująca zawartość zmiennej list_
+    # metoda wypisująca zawartość zmiennej list_
     def printList(self):
-        global currentlyOpenedList #aby była używana globalna wersja zmiennej
-        if currentlyOpenedList is not None: currentlyOpenedList.closeList() #zamyka obecnie otwartą listę zanim otworzy nową
-        if currentlyOpenedList is None: #może coś wyświetlić tylko jeżeli nic nie jest wyświetlone
-            currentlyOpenedList = self #przypisuje siebie jako otawrta liste
-            while "" in self.list_: self.list_.remove("") #czyszczenie listy z pustych elementów
-            #pętla wypisująca wszystkie wartości z list_ do poszczególnych pól entry
+        global currentlyOpenedList  # aby była używana globalna wersja zmiennej
+        if currentlyOpenedList is not None: currentlyOpenedList.closeList()  # zamyka obecnie otwartą listę zanim otworzy nową
+        if currentlyOpenedList is None:  # może coś wyświetlić tylko jeżeli nic nie jest wyświetlone
+            currentlyOpenedList = self  # przypisuje siebie jako otawrta liste
+            while "" in self.list_: self.list_.remove("")  # czyszczenie listy z pustych elementów
+            # pętla wypisująca wszystkie wartości z list_ do poszczególnych pól entry
             for j in self.list_:
-                w = tk.Entry(   #tworzy pola typu entry w których są nazwy produktów
+                w = tk.Entry(  # tworzy pola typu entry w których są nazwy produktów
                     f2,
                     width=25
                 )
                 w.insert(0, j)
                 w.pack(side=tk.TOP)
-                self.entryFields_.append(w) #dodaje te pola do listy aby potem dało się je usunac
+                self.entryFields_.append(w)  # dodaje te pola do listy aby potem dało się je usunac
             ##############
-            
-            #pole tekstowe odpowiedzialne za zebranie nazwy nowego porduktu
+
+            # pole tekstowe odpowiedzialne za zebranie nazwy nowego porduktu
             self.newEntry = tk.Entry(
                 f2,
                 width=25
@@ -50,7 +49,7 @@ class ShoppingList:
             self.newEntry.pack(side=tk.BOTTOM)
             ############
 
-            #przycisk odpowiedzialny za dodawnia nowego produktu
+            # przycisk odpowiedzialny za dodawnia nowego produktu
             self.newButton = tk.Button(
                 f2,
                 width=25,
@@ -61,67 +60,62 @@ class ShoppingList:
             self.newButton.pack(side=tk.BOTTOM)
             ##########
 
-    #metoda dodająca nowy produkt do listy
-      def addProduct(self, productName):
+    # metoda dodająca nowy produkt do listy
+    def addProduct(self, productName):
         self.list_.append(productName)
         if self == currentlyOpenedList:
             self.printList()
-            
-            
-    #metoda zamykająca obecnie otwartą listę
-     def closeList(self):
+
+    # metoda zamykająca obecnie otwartą listę
+    def closeList(self):
         global currentlyOpenedList
         isShowed = False
         self.saveList()
         for i in self.entryFields_:
-            i.destroy() 
+            i.destroy()
         self.newButton.destroy()
         self.newEntry.destroy()
         self.entryFields_.clear()
         currentlyOpenedList = None
 
-    #metoda zapisująca obecnie otwartą listę do listy list
+    # metoda zapisująca obecnie otwartą listę do listy list
     def saveList(self):
         global currentlyOpenedList
         for i in range(len(self.entryFields_)):
             self.list_[i] = (self.entryFields_[i]).get()
 
 
-
-#zmienne gloablne używane WSZĘDZIE
-listsList=[] #lista list - lista zawierająca listy zakupów
+# zmienne gloablne używane WSZĘDZIE
+listsList = []  # lista list - lista zawierająca listy zakupów
 
 currentlyOpenedList: Optional[ShoppingList] = None  # obecnie otwarta lista
 
-
-#testowa lista zakupów
+# testowa lista zakupów
 listsList.append(ShoppingList("testowaLista"))
 listsList[0].list_.append("zakup 1")
 listsList[0].list_.append("zakup 2")
 listsList[0].list_.append("zakup 3")
 listsList[0].list_.append("zakup 4")
 
-
-listsNum=len(listsList) #obecna ilosc list
-
+listsNum = len(listsList)  # obecna ilosc list
 
 
 ###########
-#FUNCTIONS
-#Funkcje operujące na liście wszystkich list zakupów (działające na lewej połówce ekranu, przypsiane do f1)
+# FUNCTIONS
+# Funkcje operujące na liście wszystkich list zakupów (działające na lewej połówce ekranu, przypsiane do f1)
 
-#funkcja tworząca przycisk służący do tworzenia nowych list i pole tekstowe typu entry gdzie trzeba podać nazwę nowej listy
+# funkcja tworząca przycisk służący do tworzenia nowych list i pole tekstowe typu entry gdzie trzeba podać nazwę nowej listy
 def createNewListButton():
-    global newListButton #aby do obu pól można było się odwoływać gdzie indziej muyszą byc globalne
+    global newListButton  # aby do obu pól można było się odwoływać gdzie indziej muyszą byc globalne
     global entry
 
     # pole do wpisania tytułu nowej listy
     entry = tk.Entry(
-        f1, #f1 przypisuje ten przycisk do ramki1
+        f1,  # f1 przypisuje ten przycisk do ramki1
         width=25
     )
-    entry.insert(0, "Podaj nazwę nowej listy") #insert "wkłada" bazowy tekst do pola entry
-    entry.pack() #"pakuje" pole aby było odpowiednio wyświetlane w ramce
+    entry.insert(0, "Podaj nazwę nowej listy")  # insert "wkłada" bazowy tekst do pola entry
+    entry.pack()  # "pakuje" pole aby było odpowiednio wyświetlane w ramce
 
     # przycisk, po kliknięciu którego dodaje się lista o tytule wpisanym w entry
     newListButton = tk.Button(
@@ -129,11 +123,13 @@ def createNewListButton():
         text="utworz liste",
         width=25,
         height=3,
-        command=newList #command to funkcja która ma być wywołana po kliknięciu przycisku. MUSI być bez (), inaczej funkcja wykona się przy interpretacji kodu, a nie przy klinkięciu.
+        command=newList
+        # command to funkcja która ma być wywołana po kliknięciu przycisku. MUSI być bez (), inaczej funkcja wykona się przy interpretacji kodu, a nie przy klinkięciu.
     )
     newListButton.pack()
 
-#funkcja tworząca przycisk służący do wyszukiwania list z listy i pole tekstowe typu entry gdzie trzeba podać nazwę wyszukiwanej listy
+
+# funkcja tworząca przycisk służący do wyszukiwania list z listy i pole tekstowe typu entry gdzie trzeba podać nazwę wyszukiwanej listy
 def createSearchBarButton():
     global searchButton
     global searchEntry
@@ -153,7 +149,8 @@ def createSearchBarButton():
         command=openSearchedList
     )
     searchButton.pack()
-    
+
+
 def openSearchedList():
     found = False
     for i in listsList:
@@ -165,24 +162,24 @@ def openSearchedList():
         searchEntry.insert(0, "brak takiej listy")
 
 
-#tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
+# tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
 def newList():
-    global listsNum 
-    newListInstance = ShoppingList(entry.get()) #zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
+    global listsNum
+    newListInstance = ShoppingList(
+        entry.get())  # zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
 
-    #przycisk do wyświetlania nowo utworzonej listy
+    # przycisk do wyświetlania nowo utworzonej listy
     listButton = tk.Button(
         f1,
         text=newListInstance.name_,
         width=25,
         height=2,
-        command = newListInstance.printList
+        command=newListInstance.printList
     )
     listButton.pack()
 
-
-    listsList.append(newListInstance) #dodaje do tablicy z listami zakupów nową listę
-    listsNum = len(listsList) #zwiększa ilość zapisanych list
+    listsList.append(newListInstance)  # dodaje do tablicy z listami zakupów nową listę
+    listsNum = len(listsList)  # zwiększa ilość zapisanych list
 
 
 # funkcja używana w opcji menu górnego poziomego "Zapisz", służąca zapisowi do pliku
@@ -193,7 +190,6 @@ def saveToFile():
 # funkcja używana w opcji menu górnego poziomego "Wczytaj", służąca wczytywaniu z pliku
 def readFromFile():
     pass
-
 
 
 #############
@@ -207,8 +203,8 @@ class ListError(Exception):
         if msg is None:
             msg = "Wystąpił problem z listą zakupów"
         super().__init__(msg)
-        
-        
+
+
 class ListAmountError(ListError):
     """Zbyt wiele list"""
 
@@ -244,7 +240,7 @@ class ListNameLengthError(ListError, ShoppingList):
             title="ListNameLengthError",
             message=f"Ilość znaków w nazwie: {len(currentList.name_)} przekracza maksymalną: {currentList.maxNameLen}")
 
-        
+
 class ListNameAlreadyTakenError(ListError, ShoppingList):
     """Nazwa listy zajęta"""
 
@@ -255,80 +251,69 @@ class ListNameAlreadyTakenError(ListError, ShoppingList):
         tk.messagebox.showerror(
             title="ListNameAlreadyTakenError",
             message=f"Nazwa \"{currentList.name_}\" jest już zajęta")
-        
-        
+
 
 #############
 
 
+# tworzy okno, chyba, wiem że musi być
+root = tk.Tk()
 
-#tworzy okno, chyba, wiem że musi być
-root=tk.Tk()
-
-
-#tworzę framey. w lewej (1) ramce zamieszczam kolejno przyciski z listami. W prawej po kliknięciu pojawia się konkretna lista
+# tworzę framey. w lewej (1) ramce zamieszczam kolejno przyciski z listami. W prawej po kliknięciu pojawia się konkretna lista
 f1 = tk.Frame(
-    width = 25,
-    height = 100,
-    bd = 1
+    width=25,
+    height=100,
+    bd=1
 )
-f1.pack(side = tk.LEFT)
+f1.pack(side=tk.LEFT)
 f2 = tk.Frame(
-    width = 25,
-    height = 100,
-    bd = 5
+    width=25,
+    height=100,
+    bd=5
 )
-f2.pack(side = tk.LEFT)
+f2.pack(side=tk.LEFT)
 
-
-#tworzenie przycisku zamykającego otwartą listę
+# tworzenie przycisku zamykającego otwartą listę
 closeListButton = tk.Button(
-    f2, #przypisanie do prawego framea
+    f2,  # przypisanie do prawego framea
     text="zamknij obecną listę",
     width=25,
     height=1,
     command=lambda: currentlyOpenedList.closeList if currentlyOpenedList is not None else None
 )
-closeListButton.pack(side = tk.TOP, anchor = tk.N)
-
-
-
+closeListButton.pack(side=tk.TOP, anchor=tk.N)
 
 tk.Label(
     f1,
     text="Tworzenie nowej listy:"
 ).pack()
-#funkcja tworząca przycisk tworzący nową listę i pole do wpisania jej nazwy - możnaby całą funckjonalność tej funkcji umieścić tutaj, nie musi być funkcji
+# funkcja tworząca przycisk tworzący nową listę i pole do wpisania jej nazwy - możnaby całą funckjonalność tej funkcji umieścić tutaj, nie musi być funkcji
 createNewListButton()
 tk.Label(
     f1,
     text="Wyszukiwarka:"
 ).pack()
-createSearchBarButton() #pole do wyszukiwania list - same as above
+createSearchBarButton()  # pole do wyszukiwania list - same as above
 tk.Label(
     f1,
     text="lista list zakupów:"
 ).pack()
 
-
-#pętla zbierająca istniejace listy z talicy listsList i tworząca przyciski do nich stworzona w celach testowych - trzeba będzie to przenieść do funkcji wczytującej z pliku
+# pętla zbierająca istniejace listy z talicy listsList i tworząca przyciski do nich stworzona w celach testowych - trzeba będzie to przenieść do funkcji wczytującej z pliku
 for i in listsList:
     listButton = tk.Button(
         f1,
         text=i.name_,
         width=25,
         height=2,
-        command = i.printList
+        command=i.printList
     )
     listButton.pack()
-    
-    
-#Menu górne poziome
+
+# Menu górne poziome
 menu = tk.Menu(root)
 root.config(menu=menu)
 menu.add_command(label="Zapisz", command=saveToFile)
 menu.add_command(label="Wczytaj", command=readFromFile)
-
-
 
 root.mainloop()
