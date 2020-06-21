@@ -62,6 +62,11 @@ class ShoppingList:
 
     # metoda dodająca nowy produkt do listy
     def addProduct(self, productName):
+        
+        # sprawdzenie czy ilość produktów nie przekracza maksymalnej
+        if len(self.list_) > 20:
+            raise ListElementsAmountError(self)
+            
         self.list_.append(productName)
         if self == currentlyOpenedList:
             self.printList()
