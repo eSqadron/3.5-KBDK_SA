@@ -289,7 +289,7 @@ closeListButton = tk.Button(
     text="zamknij obecną listę",
     width=25,
     height=1,
-    command=lambda: currentlyOpenedList.closeList if currentlyOpenedList is not None else None
+    command=lambda: currentlyOpenedList.closeList() if currentlyOpenedList is not None else None
 )
 closeListButton.pack(side=tk.TOP, anchor=tk.N)
 
