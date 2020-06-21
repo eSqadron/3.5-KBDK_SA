@@ -170,6 +170,11 @@ def openSearchedList():
 # tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
 def newList():
     global listsNum
+    
+    # sprawdzenie czy ilosc list nie przekracza maksymalnej
+    if listsNum >= 20:
+        raise ListAmountError(listsNum)
+        
     newListInstance = ShoppingList(
         entry.get())  # zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
 
