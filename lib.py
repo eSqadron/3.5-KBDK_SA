@@ -13,6 +13,15 @@ class ShoppingList:
         self.newButton = None  # zmienna w której zapisany jest przycisk dodającegy nowe pole do tej listy
         self.newEntry = None  # zmienna w której zapisane jest pole tekstowe Entry Field do którego należy podać nazwę nowego pola
 
+        # sprawdzenie, czy nazwa nie jest za długa
+        if len(name) > self.maxNameLen:
+            raise ListNameLengthError(self)
+
+        # sprawdzenie, czy nazwa listy jest zajęta
+        for i in listsList:
+            if name in i.name_:
+                raise ListNameAlreadyTakenError(self)
+
     # metoda wypisująca zawartość zmiennej list_
     def printList(self):
         global currentlyOpenedList  # aby była używana globalna wersja zmiennej
@@ -53,6 +62,11 @@ class ShoppingList:
 
     # metoda dodająca nowy produkt do listy
     def addProduct(self, productName):
+
+        # sprawdzenie czy ilość produktów nie przekracza maksymalnej
+        if len(self.list_) > 20:
+            raise ListElementsAmountError(self)
+
         self.list_.append(productName)
         if self == currentlyOpenedList:
             self.printList()
@@ -140,6 +154,11 @@ def openSearchedList():
 # tworzenie nowej listy, wraz z przyciskiem, dodaniem przycisku do tablicy przycisków itp
 def newList():
     global listsNum
+
+    # sprawdzenie czy ilosc list nie przekracza maksymalnej
+    if listsNum >= 20:
+        raise ListAmountError(listsNum)
+
     newListInstance = ShoppingList(
         entry.get())  # zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
 
