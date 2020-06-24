@@ -12,7 +12,8 @@ class ShoppingList:
         self.entryFields_ = []  # lista z polami Entry Field wyświetlanymi po prawej stronie
         self.newButton = None  # zmienna w której zapisany jest przycisk dodającegy nowe pole do tej listy
         self.newEntry = None  # zmienna w której zapisane jest pole tekstowe Entry Field do którego należy podać nazwę nowego pola
-
+        self.maxNameLen = 25  # zmienna dodana, aby w łatwy sposób umożliwić późniejsze zmienianie limitu długości nazw
+        
         # sprawdzenie, czy nazwa nie jest za długa
         if len(name) > self.maxNameLen:
             raise ListNameLengthError(self)
