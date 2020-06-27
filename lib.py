@@ -220,10 +220,11 @@ closeListButton = tk.Button(
     text="zamknij obecną listę",
     width=25,
     height=1,
-    command=lambda: currentlyOpenedList.closeList if currentlyOpenedList is not None else None  # Nie działa?
+    command=lambda: currentlyOpenedList.closeList() if currentlyOpenedList is not None else None  # Nie działa?
 )
 
 listsList = []  # lista list - lista zawierająca listy zakupów
+listsNum = 0
 
 # Menu górne
 menu = tk.Menu(root)
