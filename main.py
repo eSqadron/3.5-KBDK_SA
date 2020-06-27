@@ -41,7 +41,7 @@ def main():
             command=i.printList
         )
         listButton.pack()
-
+    root.protocol("WM_DELETE_WINDOW", onClosingEvent)
     root.mainloop()
 
 

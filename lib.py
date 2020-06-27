@@ -1,5 +1,6 @@
 import tkinter as tk
 from typing import Optional
+from ShoppingListErrors import ListAmountError, ListElementsAmountError, ListNameAlreadyTakenError, ListNameLengthError
 
 
 class ShoppingList:
@@ -176,13 +177,23 @@ def newList():
 
 # funkcja używana w opcji menu górnego poziomego "Zapisz", służąca zapisowi do pliku
 def saveToFile():
-    pass
+    print("zapis")
 
 
 # funkcja używana w opcji menu górnego poziomego "Wczytaj", służąca wczytywaniu z pliku
 def readFromFile():
     pass
 
+
+def onClosingEvent():
+    popup = tk.messagebox.askyesnocancel(title="Quit", message="Do you want to save before closing?")
+    if popup:
+        saveToFile()
+        root.destroy()
+    elif popup is not None:
+        root.destroy()
+    elif popup is None:
+        pass
 
 ############################
 # variables
