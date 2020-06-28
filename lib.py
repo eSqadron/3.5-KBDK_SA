@@ -177,7 +177,9 @@ def newList():
 
 # funkcja używana w opcji menu górnego poziomego "Zapisz", służąca zapisowi do pliku
 def saveToFile():
-    print("zapis")
+    file = tk.filedialog.asksaveasfile(mode="w",filetypes=[("Text Files", ".txt"), ("All Files", ".*")])
+    for i in listsList:
+        file.write("**" + i.name_ + '\n')
 
 
 # funkcja używana w opcji menu górnego poziomego "Wczytaj", służąca wczytywaniu z pliku
