@@ -180,10 +180,12 @@ def newList():
 # funkcja używana w opcji menu górnego poziomego "Zapisz", służąca zapisowi do pliku
 def saveToFile():
     file = tk.filedialog.asksaveasfile(mode="w",filetypes=[("Text Files", ".txt"), ("All Files", ".*")])
-    file.write("[LISTSSAVEFILE]\n")
-    for i in listsList:
-        file.write("**" + i.name_ + '\n')
-        for j in i.list_:
+    if file is not None:
+        currentlyOpenedList.saveList()
+        file.write("[LISTSSAVEFILE]\n")
+        for i in listsList:
+            file.write("**" + i.name_ + '\n')
+            for j in i.list_:
                 file.write("*" + j + '\n')
 
 
