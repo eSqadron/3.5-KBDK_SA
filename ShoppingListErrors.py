@@ -21,20 +21,12 @@ class ListAmountError(ListError):
         super().__init__(
             msg=f"Ilość list: {listsNum} przekracza maksymalną")
 
-        tk.messagebox.showerror(
-            title="ListAmountError",
-            message=f"Ilość list: {listsNum} przekracza maksymalną")
-
 
 class ListElementsAmountError(ListError):
     """Zbyt wiele pozycji na liście"""
 
     def __init__(self, currentList):
         super().__init__(msg=f"Ilość produktów: {len(currentList.list_)} przekracza maskymalną")
-
-        tk.messagebox.showerror(
-            title="ListElementsAmountError",
-            message=f"Ilość produktów: {len(currentList.list_)} przekracza maksymalną")
 
 
 class ListNameLengthError(ListError):
@@ -44,9 +36,6 @@ class ListNameLengthError(ListError):
         super().__init__(
             msg=f"Ilość znaków w nazwie: {len(currentList.name_)} przekracza maksymalną: {currentList.maxNameLen}")
 
-        tk.messagebox.showerror(
-            title="ListNameLengthError",
-            message=f"Ilość znaków w nazwie: {len(currentList.name_)} przekracza maksymalną: {currentList.maxNameLen}")
 
 
 class ListNameAlreadyTakenError(ListError):
@@ -55,7 +44,3 @@ class ListNameAlreadyTakenError(ListError):
     def __init__(self, currentList):
         super().__init__(
             msg=f"Nazwa \"{currentList.name_}\" jest już zajęta")
-
-        tk.messagebox.showerror(
-            title="ListNameAlreadyTakenError",
-            message=f"Nazwa \"{currentList.name_}\" jest już zajęta")
