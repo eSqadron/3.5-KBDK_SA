@@ -16,11 +16,17 @@ class ShoppingList:
 
         # sprawdzenie, czy nazwa nie jest za długa
         if len(name) > self.maxNameLen:
+            tk.messagebox.showerror(
+                title="ListNameLengthError",
+                message=f"Ilość znaków w nazwie: {len(self.name_)} przekracza maksymalną: {self.maxNameLen}")
             raise ListNameLengthError(self)
 
         # sprawdzenie, czy nazwa listy jest zajęta
         for i in listsList:
             if name in i.name_:
+                tk.messagebox.showerror(
+                    title="ListNameAlreadyTakenError",
+                    message=f"Nazwa \"{self.name_}\" jest już zajęta")
                 raise ListNameAlreadyTakenError(self)
 
     # metoda wypisująca zawartość zmiennej list_
@@ -66,6 +72,9 @@ class ShoppingList:
 
         # sprawdzenie czy ilość produktów nie przekracza maksymalnej
         if len(self.list_) > 20:
+            tk.messagebox.showerror(
+                title="ListElementsAmountError",
+                message=f"Ilość produktów: {len(self.list_)} przekracza maksymalną")
             raise ListElementsAmountError(self)
 
         self.list_.append(productName)
@@ -158,6 +167,9 @@ def newList():
 
     # sprawdzenie czy ilosc list nie przekracza maksymalnej
     if listsNum >= 20:
+        tk.messagebox.showerror(
+            title="ListAmountError",
+            message=f"Ilość list: {listsNum} przekracza maksymalną")
         raise ListAmountError(listsNum)
 
     newListInstance = ShoppingList(
