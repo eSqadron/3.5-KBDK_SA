@@ -16,17 +16,11 @@ class ShoppingList:
 
         # sprawdzenie, czy nazwa nie jest za długa
         if len(name) > self.maxNameLen:
-            tk.messagebox.showerror(
-                title="ListNameLengthError",
-                message=f"Ilość znaków w nazwie: {len(self.name_)} przekracza maksymalną: {self.maxNameLen}")
             raise ListNameLengthError(self)
 
         # sprawdzenie, czy nazwa listy jest zajęta
         for i in listsList:
             if name in i.name_:
-                tk.messagebox.showerror(
-                    title="ListNameAlreadyTakenError",
-                    message=f"Nazwa \"{self.name_}\" jest już zajęta")
                 raise ListNameAlreadyTakenError(self)
 
     # metoda wypisująca zawartość zmiennej list_
@@ -69,17 +63,15 @@ class ShoppingList:
 
     # metoda dodająca nowy produkt do listy
     def addProduct(self, productName):
-
         # sprawdzenie czy ilość produktów nie przekracza maksymalnej
         if len(self.list_) > 20:
             tk.messagebox.showerror(
                 title="ListElementsAmountError",
                 message=f"Ilość produktów: {len(self.list_)} przekracza maksymalną")
-            raise ListElementsAmountError(self)
-
-        self.list_.append(productName)
-        if self == currentlyOpenedList:
-            self.printList()
+        else:
+            self.list_.append(productName)
+            if self == currentlyOpenedList:
+                self.printList()
 
     # metoda zamykająca obecnie otwartą listę
     def closeList(self):
@@ -170,28 +162,37 @@ def newList():
         tk.messagebox.showerror(
             title="ListAmountError",
             message=f"Ilość list: {listsNum} przekracza maksymalną")
-        raise ListAmountError(listsNum)
+    else:
+        try:
+            newListInstance = ShoppingList(
+                entry.get())  # zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
 
-    newListInstance = ShoppingList(
-        entry.get())  # zbieram z pola entry (funkcja createNewListButton() odpowiada za tworzenie tego pola) nazwę nowej listy
+            # przycisk do wyświetlania nowo utworzonej listy
+            listButton = tk.Button(
+                f1,
+                text=newListInstance.name_,
+                width=25,
+                height=2,
+                command=newListInstance.printList
+            )
+            listButton.pack()
 
-    # przycisk do wyświetlania nowo utworzonej listy
-    listButton = tk.Button(
-        f1,
-        text=newListInstance.name_,
-        width=25,
-        height=2,
-        command=newListInstance.printList
-    )
-    listButton.pack()
+            listsList.append(newListInstance)  # dodaje do tablicy z listami zakupów nową listę
+            listsNum = len(listsList)  # zwiększa ilość zapisanych list
 
-    listsList.append(newListInstance)  # dodaje do tablicy z listami zakupów nową listę
-    listsNum = len(listsList)  # zwiększa ilość zapisanych list
+        except ListNameLengthError:
+            tk.messagebox.showerror(
+                title="ListNameLengthError",
+                message="Ilość znaków w nazwie przekracza maksymalną")
+        except ListNameAlreadyTakenError:
+            tk.messagebox.showerror(
+                title="ListNameAlreadyTakenError",
+                message="Nazwa jest już zajęta")
 
 
 # funkcja używana w opcji menu górnego poziomego "Zapisz", służąca zapisowi do pliku
 def saveToFile():
-    file = tk.filedialog.asksaveasfile(mode="w",filetypes=[("Text Files", ".txt"), ("All Files", ".*")])
+    file = tk.filedialog.asksaveasfile(mode="w", filetypes=[("Text Files", ".txt"), ("All Files", ".*")])
     if file is not None:
         currentlyOpenedList.saveList()
         file.write("[LISTSSAVEFILE]\n")
@@ -215,6 +216,7 @@ def onClosingEvent():
         root.destroy()
     elif popup is None:
         pass
+
 
 ############################
 # variables
