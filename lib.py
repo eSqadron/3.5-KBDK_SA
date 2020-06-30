@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.filedialog
 import tkinter.messagebox
 from typing import Optional
-from ShoppingListErrors import ListAmountError, ListElementsAmountError, ListNameAlreadyTakenError, ListNameLengthError
+from ShoppingListErrors import ListNameAlreadyTakenError, ListNameLengthError
 
 
 class ShoppingList:
